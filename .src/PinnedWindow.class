@@ -1,0 +1,39 @@
+' Gambas class file
+
+Private _geometry As WindowGeometry
+Private _wmClass As WindowClass
+
+Property Read WmClass As WindowClass
+Property Read Geometry As WindowGeometry
+
+Public Procedure _new(Optional wmClass As WindowClass, Optional geometry As WindowGeometry)
+    If IsMissing(WmClass) Then Return 
+    _wmClass = wmClass
+    _geometry = geometry
+End
+
+Private Function WmClass_Read() As WindowClass
+    Return _wmClass
+End
+
+Private Function Geometry_Read() As WindowGeometry
+    Return _geometry
+End
+
+Public Function ToString() As String
+    Return Subst("&1 &2", _wmClass.ToString(), _geometry.ToString())
+End
+
+Public Procedure _compare(Other As PinnedWindow) As Integer
+    Return _wmClass._compare(Other.WmClass)
+End
+
+Public Procedure _write(outputStream As Stream)
+    Write #outputStream, _geometry As Object
+    Write #outputStream, _wmClass As Object
+End
+
+Public Procedure _read(inputStream As Stream)
+    _geometry = Read #inputStream As WindowGeometry
+    _wmClass = Read #inputStream As WindowClass
+End

@@ -1,0 +1,42 @@
+' Gambas module file
+
+''' Utils that deal with persistence of pinned windows
+
+Private Const ConfigFile As String = "pinned.ser"
+
+Public Procedure _init()
+    Dim configDir As String = GetConfigDir()
+    If Not Exist(configDir) Then
+        Mkdir configDir
+    Endif
+End
+
+Public Procedure storePinnedWindows(pinnedWindows As PinnedWindow[])
+    Dim pinFile As File
+    pinFile = Open GetFullConfigPath() For Write Create
+    Write #pinFile, pinnedWindows As Object
+    Close pinFile
+Catch 
+    Error.Raise(Subst(("Could not store pinned windows config to &1. &2"), GetFullConfigPath(), Error.Text))
+End
+
+Public Function loadPinnedWindows() As PinnedWindow[]
+    If Not Exist(GetFullConfigPath()) Then Return New PinnedWindow[]
+        
+    Dim pinnedWindows As PinnedWindow[]
+    Dim pinFile As File
+    pinFile = Open GetFullConfigPath() For Read
+    pinnedWindows = Read #pinFile As PinnedWindow[]
+    Close pinFile
+    Return pinnedWindows
+Catch 
+    Error.Raise(Subst(("Could not read pinned windows config from &1. &2"), GetFullConfigPath(), Error.Text))
+End
+
+Private Function GetFullConfigPath() As String
+    Return GetConfigDir() &/ ConfigFile
+End
+
+Private Function GetConfigDir() As String
+    Return Desktop.ConfigDir &/ Application.Name
+End

@@ -1,0 +1,15 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,124,91)
+  Expand = True
+  Utility = True
+  Arrangement = Arrange.Fill
+  AutoResize = True
+  { TextHelp TextArea
+    MoveScaled(0,0,124,85)
+    Font = Font["Monospace"]
+    Expand = True
+    ReadOnly = True
+  }
+}

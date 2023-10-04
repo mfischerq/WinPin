@@ -1,0 +1,56 @@
+' Gambas module file
+
+''' Utils to get informations about windows
+
+Public Const IconWidth As Integer = 16
+Public Const IconHeight As Integer = 16
+
+'' Returns the WM_CLASS of the given window. Raises error if failing.
+Public Function GetWindowClass(winId As Integer) As WindowClass
+    Dim win As DesktopWindow = GetWindow(winId)
+    Dim wmClass As String = X11.GetWindowProperty(win.Id, "WM_CLASS")
+    Dim classParts As String[] = Split(wmClass, Chr(0)) ' cmClass contains two \0 terminated strings
+    Return New WindowClass([classParts[0], classParts[1]]) ' there is a third part that is caused by the last \0. Ignore
+Catch 
+    Error.Raise(Subst(("Could not get WM_CLASS for window &1: &2"), winId, Error.Text))
+End
+
+'' Returns the screen geometry of the given window. Raises error if window is no longer available.
+Public Function GetWindowGeometry(winId As Integer) As WindowGeometry
+    Dim currentWin As DesktopWindow = GetWindow(winId)
+    Return New WindowGeometry(currentWin.Frame.Left, currentWin.Frame.Top, currentWin.Frame.Width, currentWin.Frame.Height)
+End
+
+'' Returns the (optional) icon of the given window (or Null if not available). 
+'' Raises error if window is no longer available.
+Public Function GetWindowIcon(winId As Integer) As Picture
+    Dim currentWin As DesktopWindow = GetWindow(winId)
+    Return currentWin.Icon.Stretch(IconWidth, IconHeight).Picture
+End
+
+'' Move the given window to the given geometry. Raises error if window is no longer available.
+Public Procedure MoveWindowTo(winId As Integer, to As WindowGeometry)
+    Dim currentWin As DesktopWindow = GetWindow(winId)
+    ' win might be opened minimized or maximized in which case move has no effect. That's not what I want.
+    currentWin.FullScreen = False 
+    currentWin.Maximized = False
+    currentWin.Move(to.X, to.Y, to.Width, to.Height)
+End
+
+'' Converts a window id to a key string (to be used as key in a collection)
+Public Function GetWindowKey(winId As Integer) As String
+    Return CStr(winId)
+End
+
+'' Takes a window key (as returned from GetWindowKey) and converts it to a window id integer
+Public Function WindowKeyToId(sKey As String) As Integer
+    Return CInt(sKey)
+End
+
+'' Retrieves the window with the given id.
+'' If the window does not exist, an error is raised.
+Private Function GetWindow(winId As Integer) As DesktopWindow
+    Dim currentWin As DesktopWindow = Desktop.Windows.FromHandle(winId)
+    If IsNull(currentWin) Then Error.Raise(Subst(("The given window is no longer valid: &1"), winId))
+    Return currentWin
+End

@@ -1,0 +1,110 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,151,69)
+  Visible = False
+  Icon = Picture["BigTray.png"]
+  Persistent = True
+  Resizable = False
+  Utility = True
+  SkipTaskbar = True
+  { PopupMenuTray Menu
+    Text = ("PopupMenuTray")
+    { MenuShowUi Menu
+      Text = ("Show UI")
+      Picture = Picture["icon:/32/rename"]
+    }
+    { MenuShowHelp Menu
+      Text = ("Help")
+      Picture = Picture["icon:/32/help"]
+    }
+    { Menu1 Menu
+    }
+    { MenuQuit Menu
+      Text = ("Quit")
+      Picture = Picture["icon:/32/view-normal"]
+    }
+  }
+  { Frame1 Frame
+    MoveScaled(1,1,65,67)
+    Expand = True
+    Text = ("Active Windows")
+    Alignment = Align.Left
+    { ListActiveWindows ListView
+      MoveScaled(1,3,63,63)
+    }
+  }
+  { Frame2 Frame
+    MoveScaled(82,1,68,67)
+    Text = ("Pinned Windows")
+    Alignment = Align.Left
+    { ListPinnedWindows ListBox
+      MoveScaled(1,3,66,49)
+      ScrollBar = Scroll.Both
+    }
+    { FramePinGeometry Frame
+      MoveScaled(1,53,66,13)
+      Enabled = False
+      Text = ("Pin Geometry")
+      Alignment = Align.Left
+      { ButtonSavePin Button
+        MoveScaled(51,8,14,4)
+        ToolTip = ("Save the changed geometry")
+        Text = ("Save")
+        Picture = Picture["icon:/16/ok"]
+      }
+      { Label1 Label
+        MoveScaled(1,3.4286,10,3)
+        Text = ("Width:")
+      }
+      { Label2 Label
+        MoveScaled(1,8.4286,10,3)
+        Text = ("Height:")
+      }
+      { EntryPinWidth ValueBox
+        MoveScaled(11,3,10,4)
+      }
+      { EntryPinHeight ValueBox
+        MoveScaled(11,8,10,4)
+      }
+      { Label3 Label
+        MoveScaled(23,3.4286,12,3)
+        Text = ("Top Left X:")
+      }
+      { Label4 Label
+        MoveScaled(23,8.4286,12,3)
+        Text = ("Top Left Y:")
+      }
+      { EntryPinX ValueBox
+        MoveScaled(35,3,10,4)
+      }
+      { EntryPinY ValueBox
+        MoveScaled(35,8,10,4)
+      }
+      { ButtonTestPin Button
+        MoveScaled(51,3,14,4)
+        ToolTip = ("Test the geometry by move matching windows")
+        Text = ("Test")
+        Picture = Picture["icon:/16/intersection"]
+      }
+    }
+  }
+  { ButtonPin Button
+    MoveScaled(67,5,14,4)
+    ToolTip = ("Pin the selected active window")
+    Text = ("Pin     ")
+    Picture = Picture["icon:/16/next"]
+  }
+  { ButtonUnpin Button
+    MoveScaled(67,10,14,4)
+    ToolTip = ("Delete the pin from the selected pinned window")
+    Text = ("Unpin")
+    Picture = Picture["icon:/16/previous"]
+  }
+  { Tray #TrayIcon
+    #MoveScaled(69,18)
+    Tooltip = ("Click to open WinPin UI")
+    Picture = Picture.Load("BigTray.png")
+    PopupMenu = "PopupMenuTray"
+  }
+}

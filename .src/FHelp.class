@@ -1,0 +1,6 @@
+' Gambas class file
+
+Public Sub Form_Open()
+    Me.Text = Subst(("&1 Help"), Application.Name)
+    TextHelp.Text = File.Load("help.txt")
+End

@@ -1,0 +1,24 @@
+' Gambas class file
+
+''' Caches window icons because retrieving them is time consuming and there are not many of it
+
+' the cache as collection. Key: WindowClass.ToString(), Value: Icon Picture
+Private _icons As New Collection
+Private _defaultIcon As Picture
+
+Public Procedure _new()
+    _defaultIcon = Picture[Subst("icon:/&1x&2/window", WinUtils.IconWidth, WinUtils.IconHeight)]
+End
+
+'' Returns the icon associated with the given window having the given wmCLass.
+'' The method either fetches the icon from a cache or (if not available) retrieves
+'' the image icon from the window. If all fails or the window does not have an icon, a default icon is returned.
+Public Function GetWindowIcon(winId As Integer, wmClass As WindowClass) As Picture
+   Dim icon As Picture = _icons[wmClass.ToString()]
+   If icon Then Return icon
+   
+   Try icon = WinUtils.GetWindowIcon(winId)
+   If IsNull(icon) Or Error Then icon = _defaultIcon
+   _icons.Add(icon, wmClass.ToString())
+   Return icon
+End

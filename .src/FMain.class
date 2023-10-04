@@ -1,0 +1,164 @@
+' Gambas class file
+
+Private _currentWindows As New WindowList
+Private _pinnedWindows As PinnedWindow[]
+
+Private _iconCache As New WindowIconCache
+Private _watcher As DesktopWatcher
+
+Public Procedure _new()
+    _currentWindows.Merge(Desktop.Windows)
+    _pinnedWindows = PersistenceUtils.loadPinnedWindows()
+    DisplayPinnedWindows()
+    
+    Tray.Show
+    PopupMenuTray.Visible = False
+
+    _watcher = New DesktopWatcher As "DesktopWatcher"
+End
+
+Public Procedure DesktopWatcher_Windows()
+    _currentWindows.Merge(Desktop.Windows)
+    Dim addedWindows As WindowInfo[] = _currentWindows.LastAdded
+    If Not addedWindows.Empty Then PinNewWindows(addedWindows)
+    If Me.Visible Then DisplayCurrentWindows()
+End
+
+Private Procedure DisplayCurrentWindows()
+    ListActiveWindows.Clear()
+    For Each win As WindowInfo In _currentWindows.Windows
+        ListActiveWindows.Add(
+            WinUtils.GetWindowKey(win.Id), 
+            win.WmClass.ToString(),
+            _iconCache.GetWindowIcon(win.Id, win.WmClass))
+    Next    
+End
+
+Private Procedure DisplayPinnedWindows()
+    ListPinnedWindows.Clear
+    For Each pin As PinnedWindow In _pinnedWindows
+        ListPinnedWindows.Add(pin.ToString())
+    Next
+    EnablePinGeometryEdit(False)
+End
+
+Private Procedure PinNewWindows(newWindows As WindowInfo[])
+    Dim matchedPin As PinnedWindow
+    For Each newWin As WindowInfo In newWindows
+        matchedPin = FindFirstMatchingPinnedWindow(newWin.WmClass)
+        If matchedPin Then 
+            Try WinUtils.MoveWindowTo(newWin.Id, matchedPin.Geometry)
+            If Error Then Continue
+        Endif
+    Next
+End
+
+Fast Private Function FindFirstMatchingPinnedWindow(winClass As WindowClass) As PinnedWindow
+    For Each pinnedWin As PinnedWindow In _pinnedWindows
+        If pinnedWin.WmClass.InstanceName = winClass.InstanceName And pinnedWin.WmClass.ClassName = winClass.ClassName Then 
+            Return pinnedWin
+        Endif
+    Next
+    Return Null
+End
+
+Public Procedure ButtonPin_Click()
+    Dim selectedItem As _TreeView_Item = ListActiveWindows.Current
+    If Not selectedItem Then Return
+
+    Dim winId As String = selectedItem.Key
+    Dim winInfo As WindowInfo = _currentWindows.Windows[winId]
+    Dim pin As PinnedWindow = New PinnedWindow(winInfo.WmClass, WinUtils.GetWindowGeometry(WinUtils.WindowKeyToId(winId)))
+
+    Dim samePinIndex As Integer = _pinnedWindows.Find(pin)
+    If samePinIndex > -1 Then _pinnedWindows.Remove(samePinIndex)
+
+    _pinnedWindows.Add(pin)
+    DisplayPinnedWindows()
+    PersistenceUtils.storePinnedWindows(_pinnedWindows)
+Catch 
+    Message.Error(Subst(("Could not pin the selected window &1: &2"), winId, Error.Text))
+End
+
+Public Procedure ButtonUnpin_Click()
+    Dim selectedIndex As Integer = ListPinnedWindows.Index
+    If selectedIndex = -1 Then Return
+    
+    EnablePinGeometryEdit(False)
+    
+    ListPinnedWindows.Remove(selectedIndex)
+    _pinnedWindows.Remove(selectedIndex)
+    
+    DisplayPinnedWindows()
+    PersistenceUtils.storePinnedWindows(_pinnedWindows)
+End
+
+Private Procedure EnablePinGeometryEdit(enable As Boolean)
+    FramePinGeometry.Enabled = enable
+    EntryPinWidth.Text = ""
+    EntryPinHeight.Text = ""
+    EntryPinX.Text = ""
+    EntryPinY.Text = ""
+End
+
+Public Procedure ListPinnedWindows_Select()
+    Dim selectedIndex As Integer = ListPinnedWindows.Index
+    If selectedIndex = -1 Then Return
+    
+    EnablePinGeometryEdit(True)
+    
+    Dim pin As PinnedWindow = _pinnedWindows[selectedIndex]
+    EntryPinWidth.Text = pin.Geometry.Width
+    EntryPinHeight.Text = pin.Geometry.Height
+    EntryPinX.Text = pin.Geometry.X
+    EntryPinY.Text = pin.Geometry.Y    
+End
+
+Public Procedure ButtonSavePin_Click()
+    Dim selectedIndex As Integer = ListPinnedWindows.Index
+    If selectedIndex = -1 Then 
+        Message.Error(("A Pin has to be selected to be able to save changes!"))
+    Endif
+    
+    Dim pin As PinnedWindow = _pinnedWindows[selectedIndex]
+    pin.Geometry.Width = EntryPinWidth.Value
+    pin.Geometry.Height = EntryPinHeight.Value
+    pin.Geometry.X = EntryPinX.Value
+    pin.Geometry.Y = EntryPinY.Value
+    
+    PersistenceUtils.storePinnedWindows(_pinnedWindows)
+    DisplayPinnedWindows()
+    ListPinnedWindows.Index = selectedIndex
+End
+
+Public Procedure ButtonTestPin_Click()
+    Dim selectedIndex As Integer = ListPinnedWindows.Index
+    If selectedIndex = -1 Then 
+        Message.Error(("A Pin has to be selected to be able to test changes!"))
+    Endif
+    
+    Dim targetGeometry As WindowGeometry = New WindowGeometry(EntryPinX.Value, EntryPinY.Value, EntryPinWidth.Value, EntryPinHeight.Value)
+    Dim pin As PinnedWindow = _pinnedWindows[selectedIndex]
+    For Each winInfo As WindowInfo In _currentWindows.FindByWindowClass(pin.WmClass)
+        WinUtils.MoveWindowTo(winInfo.Id, targetGeometry)
+    Next
+End
+
+Public Procedure Tray_Click() 
+    MenuShowUi_Click
+End
+
+Public Procedure MenuQuit_Click()
+    Tray.Delete
+    Me.Persistent = False
+    Me.Close
+    FHelp.Close
+End
+
+Public Procedure MenuShowUi_Click()
+    Me.Show
+End
+
+Public Sub MenuShowHelp_Click()
+    FHelp.Show
+End

@@ -1,0 +1,24 @@
+' Gambas class file
+
+''' Collects all information about a window that is required to display the window in the list of current windows
+''' Note that only info's that are stable for a window shall be stored here!
+
+Private _id As Integer
+Private _wmClass As WindowClass
+
+Property Read Id As Integer
+Property Read WmClass As WindowClass
+
+'' Creates a new instance for the given window id. Raises error if wmCLass could not be calculated.
+Public Procedure _new(id As Integer)
+    _id = id
+    _wmClass = WinUtils.GetWindowClass(id)
+End
+
+Private Function Id_Read() As Integer
+    Return _id
+End
+
+Private Function WmClass_Read() As WindowClass
+    Return _wmClass
+End

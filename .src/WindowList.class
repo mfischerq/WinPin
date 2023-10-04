@@ -1,0 +1,60 @@
+' Gambas class file
+
+''' Contains all windows that are currently available.
+''' Has the ability to merge another list of windows (add missing windows, remove obsolete windows)
+
+' contains all WindowInfo's, keyed by the id of the window
+Private _currentWindows As New Collection
+
+' contains the windows that have been added during the last merge
+Private _lastAddedWindows As WindowInfo[]
+
+Property Read Windows As Collection
+Property Read LastAdded As WindowInfo[]
+
+Private Function Windows_Read() As Collection
+    Return _currentWindows
+End
+
+Private Function LastAdded_Read() As WindowInfo[]
+    Return _lastAddedWindows
+End
+
+'' Returns all WindowInfo objects that have the given WindowClass.
+'' Never Null, but the result array might be empty.
+Public Function FindByWindowClass(wmClass As WindowClass) As WindowInfo[]
+    Dim result As New WindowInfo[]
+    For Each winInfo As WindowInfo In _currentWindows
+        If winInfo.WmClass = wmClass Then result.Add(winInfo)
+    Next
+    Return result
+End
+
+'' Merges the given windows into the current list of windows.
+'' Windows that are not in currentWindows but in the given ~newWindows~ are called ~LastAddedWindows~.
+'' These windows are added to the currentWindows and are made available in property `LastAdded`.
+'' Windows that are in currentWindows but not in the given ~newWindows~ are called ~LastRemovedWindows~.
+'' These windows are removed from the currentWindows.
+Fast Public Procedure Merge(newWindows As _Desktop_Windows)
+    Dim addedWindows As New WindowInfo[]
+    Dim removedWindows As Collection = _currentWindows.Copy()
+    Dim winInfo As WindowInfo
+    
+    For Each win As DesktopWindow In newWindows
+        Dim winKey As String = WinUtils.GetWindowKey(win.Id)
+        If Not _currentWindows.Exist(winKey) Then         
+            Try winInfo = New WindowInfo(win.Id)
+            If Error Then Continue ' ignore this window without wmClass
+            
+            addedWindows.Add(winInfo)
+            _currentWindows.Add(winInfo, winKey)
+        Else 
+            removedWindows.Remove(winKey)
+        Endif
+    Next
+    _lastAddedWindows = addedWindows
+    
+    For Each winInfo As WindowInfo In removedWindows
+        _currentWindows.Remove(WinUtils.GetWindowKey(winInfo.Id))
+    Next
+End

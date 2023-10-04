@@ -1,0 +1,69 @@
+' Gambas class file
+
+Private _x As Integer
+Private _y As Integer
+Private _width As Integer
+Private _height As Integer
+
+Property X As Integer
+Property Y As Integer
+Property Height As Integer
+Property Width As Integer
+
+Public Procedure _new(Optional x As Integer, Optional y As Integer, Optional width As Integer, Optional height As Integer)
+    If IsMissing(x) Then Return 
+    _x = x
+    _y = y
+    _width = width
+    _height = height
+End
+
+Private Function X_Read() As Integer
+    Return _x
+End
+
+Private Sub X_Write(Value As Integer)
+    _x = Value
+End
+
+Private Function Y_Read() As Integer
+    Return _y
+End
+
+Private Sub Y_Write(Value As Integer)
+    _y = Value
+End
+
+Private Function Height_Read() As Integer
+    Return _height
+End
+
+Private Sub Height_Write(Value As Integer)
+    _height = Value
+End
+
+Private Function Width_Read() As Integer
+    Return _width
+End
+
+Private Sub Width_Write(Value As Integer)
+    _width = Value
+End
+
+Public Function ToString() As String
+    Return Subst("&1x&2@(&3,&4)", _Width, _Height, _X, _Y)
+End
+
+Public Procedure _write(outputStream As Stream)
+    Write #outputStream, _x As Integer
+    Write #outputStream, _y As Integer
+    Write #outputStream, _width As Integer
+    Write #outputStream, _height As Integer
+End
+
+Public Procedure _read(inputStream As Stream)
+    _x = Read #inputStream As Integer
+    _y = Read #inputStream As Integer
+    _width = Read #inputStream As Integer
+    _height = Read #inputStream As Integer
+End

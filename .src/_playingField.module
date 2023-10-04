@@ -1,0 +1,31 @@
+' Gambas module file
+
+''' To try things out!
+
+Public Sub Main()
+    Dim win As DesktopWindow
+    
+    For Each win In Desktop.Windows
+        Debug "Win: " & win.Id & " Name: " & win.Name
+        Debug Subst("\tFrame &1x&2@(&3,&4)", win.Frame.Width, win.Frame.Height, win.Frame.X, win.Frame.Y)
+        Debug Subst("\tGeom  &1x&2@(&3,&4)", win.Geometry.Width, win.Geometry.Height, win.Geometry.X, win.Geometry.Y)
+        Debug Subst("\tWin   &1x&2@(&3,&4)", win.Width, win.Height, win.X, win.Y)
+    Next
+
+    'Dim winId As Integer = &H520003e ' FF
+    'Dim winId As Integer = &H580003a ' TB
+    ' Dim winId As Integer = &5c00006 ' Terminal
+    ' Dim win As DesktopWindow = Desktop.Windows.FromHandle(winId)
+    ' Debug Subst("Frame &1x&2@(&3,&4)", win.Frame.Width, win.Frame.Height, win.Frame.X, win.Frame.Y)
+    ' Debug Subst("Geom  &1x&2@(&3,&4)", win.Geometry.Width, win.Geometry.Height, win.Geometry.X, win.Geometry.Y)
+    ' Debug Subst("Win   &1x&2@(&3,&4)", win.Width, win.Height, win.X, win.Y)
+
+    'win.Move(501, 44, 1419, 1008)
+
+   ' Stock.Debug = True
+   ' For Each sIcon As String In Stock.Icons
+   '    Print sIcon
+   ' Next
+   ' 
+   ' Debug "load stock pic: size: " & Picture["icon:/small/window"].Height
+End

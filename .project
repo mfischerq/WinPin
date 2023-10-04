@@ -1,0 +1,23 @@
+# Gambas Project File 3.0
+Title=WinPin
+Startup=FMain
+Icon=BigTray.png
+Version=0.7.2
+Component=gb.image
+Component=gb.gui
+Component=gb.form
+Component=gb.dbus
+Component=gb.desktop
+Component=gb.desktop.x11
+Component=gb.gui.trayicon
+Description="Allows to 'pin' an application window to a predefined position/size on screen. \n\nWhenever you restart an application you configured a pinned window for, it's window will be positioned to the pinned position/size. This is especially helpful for applications that do not restore their last position/size when restarted."
+Authors="Martin Fischer"
+TabSize=4
+Translate=1
+Language=en_US
+KeepDebugInfo=0
+Vendor=MartinFischer
+Packager=1
+Tags=TrayIcon,System,Settings,Monitor
+GambasVersion=3.3
+WebSite=none

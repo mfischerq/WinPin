@@ -1,0 +1,43 @@
+' Gambas class file
+
+Private _instanceName As String
+Private _className As String
+
+Property Read InstanceName As String
+Property Read ClassName As String
+
+Public Procedure _new(Optional wmClass As String[])
+    If IsMissing(wmClass) Then Return 
+    _instanceName = wmClass[0]
+    _className = wmClass[1]
+End
+
+Private Function InstanceName_Read() As String
+    Return _instanceName
+End
+
+Private Function ClassName_Read() As String
+    Return _className
+End
+
+Public Procedure _compare(Other As WindowClass) As Integer
+    If (_instanceName = Other.InstanceName) And (_className = Other.ClassName) Then 
+        Return 0
+    Else 
+        Return IIf(_instanceName > Other.InstanceName, 1, -1)
+    Endif
+End
+
+Public Function ToString() As String
+    Return Subst("[&1|&2]", _instanceName, _className)
+End
+
+Public Procedure _write(outputStream As Stream)
+    Write #outputStream, _instanceName As String
+    Write #outputStream, _className As String
+End
+
+Public Procedure _read(inputStream As Stream)
+    _instanceName = Read #inputStream As String
+    _className = Read #inputStream As String
+End
