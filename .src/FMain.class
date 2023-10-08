@@ -53,7 +53,7 @@ Private Procedure PinNewWindows(newWindows As WindowInfo[])
     Next
 End
 
-Fast Private Function FindFirstMatchingPinnedWindow(winClass As WindowClass) As PinnedWindow
+Private Function FindFirstMatchingPinnedWindow(winClass As WindowClass) As PinnedWindow
     For Each pinnedWin As PinnedWindow In _pinnedWindows
         If pinnedWin.WmClass.InstanceName = winClass.InstanceName And pinnedWin.WmClass.ClassName = winClass.ClassName Then 
             Return pinnedWin

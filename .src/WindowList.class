@@ -35,7 +35,7 @@ End
 '' These windows are added to the currentWindows and are made available in property `LastAdded`.
 '' Windows that are in currentWindows but not in the given ~newWindows~ are called ~LastRemovedWindows~.
 '' These windows are removed from the currentWindows.
-Fast Public Procedure Merge(newWindows As _Desktop_Windows)
+Public Procedure Merge(newWindows As _Desktop_Windows)
     Dim addedWindows As New WindowInfo[]
     Dim removedWindows As Collection = _currentWindows.Copy()
     Dim winInfo As WindowInfo
