@@ -2,14 +2,17 @@
 
 Private _geometry As WindowGeometry
 Private _wmClass As WindowClass
+Private _pinFirstWindowOnly As Boolean
 
 Property Read WmClass As WindowClass
 Property Read Geometry As WindowGeometry
+Property PinFirstWindowOnly As Boolean
 
 Public Procedure _new(Optional wmClass As WindowClass, Optional geometry As WindowGeometry)
     If IsMissing(WmClass) Then Return 
     _wmClass = wmClass
     _geometry = geometry
+    _pinFirstWindowOnly = False
 End
 
 Private Function WmClass_Read() As WindowClass
@@ -18,6 +21,14 @@ End
 
 Private Function Geometry_Read() As WindowGeometry
     Return _geometry
+End
+
+Private Function PinFirstWindowOnly_Read() As Boolean
+    Return _pinFirstWindowOnly
+End
+
+Private Sub PinFirstWindowOnly_Write(Value As Boolean)
+    _pinFirstWindowOnly = Value
 End
 
 Public Function ToString() As String
@@ -31,9 +42,11 @@ End
 Public Procedure _write(outputStream As Stream)
     Write #outputStream, _geometry As Object
     Write #outputStream, _wmClass As Object
+    Write #outputStream, _pinFirstWindowOnly As Boolean
 End
 
 Public Procedure _read(inputStream As Stream)
     _geometry = Read #inputStream As WindowGeometry
     _wmClass = Read #inputStream As WindowClass
-End
+    _pinFirstWindowOnly = Read #inputStream As Boolean
+End 

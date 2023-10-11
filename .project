@@ -2,7 +2,7 @@
 Title=WinPin
 Startup=FMain
 Icon=BigTray.png
-Version=0.7.2
+Version=0.7.3
 Component=gb.image
 Component=gb.gui.qt
 Component=gb.form

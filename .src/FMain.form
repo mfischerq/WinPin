@@ -1,7 +1,7 @@
 # Gambas Form File 3.0
 
 { Form Form
-  MoveScaled(0,0,151,69)
+  MoveScaled(0,0,151,73)
   Visible = False
   Icon = Picture["BigTray.png"]
   Persistent = True
@@ -39,53 +39,62 @@
     Text = ("Pinned Windows")
     Alignment = Align.Left
     { ListPinnedWindows ListBox
-      MoveScaled(1,3,66,49)
+      MoveScaled(1,3,66,46)
       ScrollBar = Scroll.Both
     }
     { FramePinGeometry Frame
-      MoveScaled(1,53,66,13)
+      MoveScaled(1,50,66,16)
       Enabled = False
       Text = ("Pin Geometry")
       Alignment = Align.Left
+      { CheckPinFirstOnly CheckBox
+        MoveScaled(10.4286,2,38,4)
+        ToolTip = ("Applies pinning only to the first window of this kind")
+        Text = ("Pin first window only")
+      }
+      { EntryPinWidth ValueBox
+        MoveScaled(11,6,9,4)
+      }
+      { EntryPinHeight ValueBox
+        MoveScaled(11,11,9,4)
+      }
+      { EntryPinX ValueBox
+        MoveScaled(35,6,9,4)
+      }
+      { EntryPinY ValueBox
+        MoveScaled(35,11,9,4)
+      }
+      { ButtonTestPin Button
+        MoveScaled(51,6,14,4)
+        ToolTip = ("Test the geometry by move matching windows")
+        Text = ("Test")
+        Picture = Picture["icon:/16/intersection"]
+      }
       { ButtonSavePin Button
-        MoveScaled(51,8,14,4)
+        MoveScaled(51,11,14,4)
         ToolTip = ("Save the changed geometry")
         Text = ("Save")
         Picture = Picture["icon:/16/ok"]
       }
       { Label1 Label
-        MoveScaled(1,3.4286,10,3)
+        MoveScaled(1,6.4286,10,3)
+        NoTabFocus = True
         Text = ("Width:")
       }
       { Label2 Label
-        MoveScaled(1,8.4286,10,3)
+        MoveScaled(1,11.4286,10,3)
+        NoTabFocus = True
         Text = ("Height:")
       }
-      { EntryPinWidth ValueBox
-        MoveScaled(11,3,10,4)
-      }
-      { EntryPinHeight ValueBox
-        MoveScaled(11,8,10,4)
-      }
       { Label3 Label
-        MoveScaled(23,3.4286,12,3)
+        MoveScaled(23,6.4286,12,3)
+        NoTabFocus = True
         Text = ("Top Left X:")
       }
       { Label4 Label
-        MoveScaled(23,8.4286,12,3)
+        MoveScaled(23,11.4286,12,3)
+        NoTabFocus = True
         Text = ("Top Left Y:")
-      }
-      { EntryPinX ValueBox
-        MoveScaled(35,3,10,4)
-      }
-      { EntryPinY ValueBox
-        MoveScaled(35,8,10,4)
-      }
-      { ButtonTestPin Button
-        MoveScaled(51,3,14,4)
-        ToolTip = ("Test the geometry by move matching windows")
-        Text = ("Test")
-        Picture = Picture["icon:/16/intersection"]
       }
     }
   }

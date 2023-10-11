@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WinPin 3.18.4\n"
-"PO-Revision-Date: 2023-09-30 19:04 UTC\n"
+"PO-Revision-Date: 2023-10-11 00:19 UTC\n"
 "Last-Translator: fischer <fischer@ThinkPad-L15>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -13,7 +13,7 @@ msgstr ""
 msgid "&1 Help"
 msgstr "&1 Hilfe"
 
-#: FMain.form:62
+#: FMain.form:63
 msgid "Active Windows"
 msgstr "Aktive Fenster"
 
@@ -22,15 +22,19 @@ msgstr "Aktive Fenster"
 msgid "Allows to 'pin' an application window to a predefined position/size on screen. \n\nWhenever you restart an application you configured a pinned window for, it's window will be positioned to the pinned position/size. This is especially helpful for applications that do not restore their last position/size when restarted."
 msgstr ""
 
-#: FMain.class:120
+#: FMain.class:127
 msgid "A Pin has to be selected to be able to save changes!"
 msgstr "Ein 'Fixiertes Fenster' muß ausgewählt sein um die Änderungen zu speichern!"
 
-#: FMain.class:137
+#: FMain.class:145
 msgid "A Pin has to be selected to be able to test changes!"
 msgstr "Ein 'Fixiertes Fenster' muß ausgewählt sein um die Änderungen zu testen!"
 
-#: FMain.form:153
+#: FMain.form:89
+msgid "Applies pinning only to the first window of this kind"
+msgstr "Fixiert nur das erste Fenster dieser Art"
+
+#: FMain.form:164
 msgid "Click to open WinPin UI"
 msgstr "Clicken um das Configrations-Fenster von WinPin zu öffnen"
 
@@ -38,7 +42,7 @@ msgstr "Clicken um das Configrations-Fenster von WinPin zu öffnen"
 msgid "Could not get WM_CLASS for window &1: &2"
 msgstr "Konnte WM_CLASS für das Fenster &1 nicht ermitteln: &2"
 
-#: FMain.class:80
+#: FMain.class:86
 msgid "Could not pin the selected window &1: &2"
 msgstr "Konnte das ausgewählte Fenster &1 nicht fixieren: &2"
 
@@ -50,60 +54,64 @@ msgstr "Die Konfiguration konnte nicht von '&1' geladen werden: &2"
 msgid "Could not store pinned windows config to &1. &2"
 msgstr "Die Konfiguration konnte nicht nach '&1' gespeichert werden: &2"
 
-#: FMain.form:147
+#: FMain.form:158
 msgid "Delete the pin from the selected pinned window"
 msgstr "Fixierung des ausgewählten Fensters entfernen"
 
-#: FMain.form:100
+#: FMain.form:132
 msgid "Height:"
 msgstr "Höhe:"
 
-#: FMain.form:46
+#: FMain.form:47
 msgid "Help"
 msgstr "Hilfe"
 
-#: FMain.form:141
+#: FMain.form:152
 msgid "Pin     "
 msgstr "Fixieren    "
 
-#: FMain.form:83
+#: FMain.form:90
+msgid "Pin first window only"
+msgstr "Nur erstes Fenster fixieren"
+
+#: FMain.form:84
 msgid "Pin Geometry"
 msgstr "Position/Größe"
 
-#: FMain.form:72
+#: FMain.form:73
 msgid "Pinned Windows"
 msgstr "Fixierte Fenster"
 
-#: FMain.form:140
+#: FMain.form:151
 msgid "Pin the selected active window"
 msgstr "Fixiert das ausgewählte Fenster"
 
 # gb-ignore
-#: FMain.form:38
+#: FMain.form:39
 msgid "PopupMenuTray"
 msgstr ""
 
-#: FMain.form:54
+#: FMain.form:55
 msgid "Quit"
 msgstr "Beenden"
 
-#: FMain.form:89
+#: FMain.form:119
 msgid "Save"
 msgstr "Speichern"
 
-#: FMain.form:88
+#: FMain.form:118
 msgid "Save the changed geometry"
 msgstr "Speichert die geänderte Position/Größe"
 
-#: FMain.form:41
+#: FMain.form:42
 msgid "Show UI"
 msgstr "Configuration öffnen"
 
-#: FMain.form:132
+#: FMain.form:112
 msgid "Test"
 msgstr "Test"
 
-#: FMain.form:131
+#: FMain.form:111
 msgid "Test the geometry by move matching windows"
 msgstr "Wendet die neue Position/Größe auf alle passenden Fenster testweise an"
 
@@ -111,19 +119,19 @@ msgstr "Wendet die neue Position/Größe auf alle passenden Fenster testweise an
 msgid "The given window is no longer valid: &1"
 msgstr "Das Fenster ist nicht mehr gültig: &1"
 
-#: FMain.form:113
+#: FMain.form:138
 msgid "Top Left X:"
 msgstr "Links oben X:"
 
-#: FMain.form:118
+#: FMain.form:144
 msgid "Top Left Y:"
 msgstr "Links oben Y:"
 
-#: FMain.form:148
+#: FMain.form:159
 msgid "Unpin"
 msgstr "Freigeben"
 
-#: FMain.form:95
+#: FMain.form:126
 msgid "Width:"
 msgstr "Breite:"
 
