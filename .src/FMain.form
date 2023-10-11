@@ -47,6 +47,26 @@
       Enabled = False
       Text = ("Pin Geometry")
       Alignment = Align.Left
+      { Label1 Label
+        MoveScaled(1,6.4286,10,3)
+        NoTabFocus = True
+        Text = ("Width:")
+      }
+      { Label2 Label
+        MoveScaled(1,11.4286,10,3)
+        NoTabFocus = True
+        Text = ("Height:")
+      }
+      { Label3 Label
+        MoveScaled(23,6.4286,12,3)
+        NoTabFocus = True
+        Text = ("Top Left X:")
+      }
+      { Label4 Label
+        MoveScaled(23,11.4286,12,3)
+        NoTabFocus = True
+        Text = ("Top Left Y:")
+      }
       { CheckPinFirstOnly CheckBox
         MoveScaled(10.4286,2,38,4)
         ToolTip = ("Applies pinning only to the first window of this kind")
@@ -75,26 +95,6 @@
         ToolTip = ("Save the changed geometry")
         Text = ("Save")
         Picture = Picture["icon:/16/ok"]
-      }
-      { Label1 Label
-        MoveScaled(1,6.4286,10,3)
-        NoTabFocus = True
-        Text = ("Width:")
-      }
-      { Label2 Label
-        MoveScaled(1,11.4286,10,3)
-        NoTabFocus = True
-        Text = ("Height:")
-      }
-      { Label3 Label
-        MoveScaled(23,6.4286,12,3)
-        NoTabFocus = True
-        Text = ("Top Left X:")
-      }
-      { Label4 Label
-        MoveScaled(23,11.4286,12,3)
-        NoTabFocus = True
-        Text = ("Top Left Y:")
       }
     }
   }
