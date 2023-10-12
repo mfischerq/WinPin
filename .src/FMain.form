@@ -68,9 +68,9 @@
         Text = ("Top Left Y:")
       }
       { CheckPinFirstOnly CheckBox
-        MoveScaled(10.4286,2,38,4)
+        MoveScaled(10.4286,2,54,4)
         ToolTip = ("Applies pinning only to the first window of this kind")
-        Text = ("Pin first window only")
+        Text = ("Pin first window (per virt. desktop) only")
       }
       { EntryPinWidth ValueBox
         MoveScaled(11,6,9,4)

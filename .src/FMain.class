@@ -19,8 +19,7 @@ End
 
 Public Procedure DesktopWatcher_Windows()
     _currentWindows.Merge(Desktop.Windows)
-    Dim addedWindows As WindowInfo[] = _currentWindows.LastAdded
-    If Not addedWindows.Empty Then PinNewWindows(addedWindows)
+    PinNewWindows(_currentWindows.LastAdded)
     If Me.Visible Then DisplayCurrentWindows()
 End
 

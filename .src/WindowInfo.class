@@ -5,14 +5,17 @@
 
 Private _id As Integer
 Private _wmClass As WindowClass
+Private _desktop As Integer
 
 Property Read Id As Integer
 Property Read WmClass As WindowClass
+Property Read Desktop As Integer
 
 '' Creates a new instance for the given window id. Raises error if wmCLass could not be calculated.
-Public Procedure _new(id As Integer)
-    _id = id
-    _wmClass = WinUtils.GetWindowClass(id)
+Public Procedure _new(a_id As Integer, a_desktop As Integer)
+    _id = a_id
+    _wmClass = WinUtils.GetWindowClass(a_id)
+    _desktop = a_desktop
 End
 
 Private Function Id_Read() As Integer
@@ -21,4 +24,8 @@ End
 
 Private Function WmClass_Read() As WindowClass
     Return _wmClass
+End
+
+Private Function Desktop_Read() As Integer
+    Return _desktop
 End

@@ -20,12 +20,13 @@ Private Function LastAdded_Read() As WindowInfo[]
     Return _lastAddedWindows
 End
 
-'' Returns all WindowInfo objects that have the given WindowClass.
+'' Returns all WindowInfo objects on the current Desktop that have the given WindowClass.
 '' Never Null, but the result array might be empty.
 Public Function FindByWindowClass(wmClass As WindowClass) As WindowInfo[]
+    Dim currentDesktop As Integer = Desktop.Current
     Dim result As New WindowInfo[]
     For Each winInfo As WindowInfo In _currentWindows
-        If winInfo.WmClass = wmClass Then result.Add(winInfo)
+        If winInfo.Desktop = currentDesktop And winInfo.WmClass = wmClass Then result.Add(winInfo)
     Next
     Return result
 End
@@ -42,8 +43,8 @@ Public Procedure Merge(newWindows As _Desktop_Windows)
     
     For Each win As DesktopWindow In newWindows
         Dim winKey As String = WinUtils.GetWindowKey(win.Id)
-        If Not _currentWindows.Exist(winKey) Then         
-            Try winInfo = New WindowInfo(win.Id)
+        If Not _currentWindows.Exist(winKey) Then
+            Try winInfo = New WindowInfo(win.Id, win.Desktop)
             If Error Then Continue ' ignore this window without wmClass
             
             addedWindows.Add(winInfo)

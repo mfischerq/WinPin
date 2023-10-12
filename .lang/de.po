@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WinPin 3.18.4\n"
-"PO-Revision-Date: 2023-10-11 00:19 UTC\n"
+"PO-Revision-Date: 2023-10-12 13:18 UTC\n"
 "Last-Translator: fischer <fischer@ThinkPad-L15>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -22,15 +22,15 @@ msgstr "Aktive Fenster"
 msgid "Allows to 'pin' an application window to a predefined position/size on screen. \n\nWhenever you restart an application you configured a pinned window for, it's window will be positioned to the pinned position/size. This is especially helpful for applications that do not restore their last position/size when restarted."
 msgstr ""
 
-#: FMain.class:127
+#: FMain.class:121
 msgid "A Pin has to be selected to be able to save changes!"
 msgstr "Ein 'Fixiertes Fenster' muß ausgewählt sein um die Änderungen zu speichern!"
 
-#: FMain.class:145
+#: FMain.class:139
 msgid "A Pin has to be selected to be able to test changes!"
 msgstr "Ein 'Fixiertes Fenster' muß ausgewählt sein um die Änderungen zu testen!"
 
-#: FMain.form:89
+#: FMain.form:113
 msgid "Applies pinning only to the first window of this kind"
 msgstr "Fixiert nur das erste Fenster dieser Art"
 
@@ -42,7 +42,7 @@ msgstr "Clicken um das Configrations-Fenster von WinPin zu öffnen"
 msgid "Could not get WM_CLASS for window &1: &2"
 msgstr "Konnte WM_CLASS für das Fenster &1 nicht ermitteln: &2"
 
-#: FMain.class:86
+#: FMain.class:80
 msgid "Could not pin the selected window &1: &2"
 msgstr "Konnte das ausgewählte Fenster &1 nicht fixieren: &2"
 
@@ -58,7 +58,7 @@ msgstr "Die Konfiguration konnte nicht nach '&1' gespeichert werden: &2"
 msgid "Delete the pin from the selected pinned window"
 msgstr "Fixierung des ausgewählten Fensters entfernen"
 
-#: FMain.form:132
+#: FMain.form:96
 msgid "Height:"
 msgstr "Höhe:"
 
@@ -70,9 +70,9 @@ msgstr "Hilfe"
 msgid "Pin     "
 msgstr "Fixieren    "
 
-#: FMain.form:90
-msgid "Pin first window only"
-msgstr "Nur erstes Fenster fixieren"
+#: FMain.form:114
+msgid "Pin first window (per virt. desktop) only"
+msgstr "Nur erstes Fenster (pro virt. Desktop) fixieren"
 
 #: FMain.form:84
 msgid "Pin Geometry"
@@ -95,11 +95,11 @@ msgstr ""
 msgid "Quit"
 msgstr "Beenden"
 
-#: FMain.form:119
+#: FMain.form:143
 msgid "Save"
 msgstr "Speichern"
 
-#: FMain.form:118
+#: FMain.form:142
 msgid "Save the changed geometry"
 msgstr "Speichert die geänderte Position/Größe"
 
@@ -107,11 +107,11 @@ msgstr "Speichert die geänderte Position/Größe"
 msgid "Show UI"
 msgstr "Configuration öffnen"
 
-#: FMain.form:112
+#: FMain.form:136
 msgid "Test"
 msgstr "Test"
 
-#: FMain.form:111
+#: FMain.form:135
 msgid "Test the geometry by move matching windows"
 msgstr "Wendet die neue Position/Größe auf alle passenden Fenster testweise an"
 
@@ -119,11 +119,11 @@ msgstr "Wendet die neue Position/Größe auf alle passenden Fenster testweise an
 msgid "The given window is no longer valid: &1"
 msgstr "Das Fenster ist nicht mehr gültig: &1"
 
-#: FMain.form:138
+#: FMain.form:102
 msgid "Top Left X:"
 msgstr "Links oben X:"
 
-#: FMain.form:144
+#: FMain.form:108
 msgid "Top Left Y:"
 msgstr "Links oben Y:"
 
@@ -131,7 +131,7 @@ msgstr "Links oben Y:"
 msgid "Unpin"
 msgstr "Freigeben"
 
-#: FMain.form:126
+#: FMain.form:90
 msgid "Width:"
 msgstr "Breite:"
 
